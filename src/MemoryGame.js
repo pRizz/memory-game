@@ -22,6 +22,7 @@ export class MemoryGame {
 
   constructor(pairCount = 12, delegate) {
     this.pairCount = pairCount
+    this.winningPoints = pairCount * 2
     this.cardViewModels = createShuffledCards(pairCount)
     this.delegate = delegate
   }
@@ -46,7 +47,9 @@ export class MemoryGame {
     if(this.currentlySelectedCard.value === card.value) {
       this.points += 2
       this.currentlySelectedCard = null
-      console.log('points: ', this.points)
+      if(this.points === this.winningPoints) {
+        this.delegate.onGameWon()
+      }
     } else {
       this.shouldIgnoreClicks = true
       setTimeout(() => {
@@ -55,7 +58,7 @@ export class MemoryGame {
         this.currentlySelectedCard = null
         this.shouldIgnoreClicks = false
         this.delegate.onGameUpdated()
-      }, 2000)
+      }, 1500)
     }
 
   }

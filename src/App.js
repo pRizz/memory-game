@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import MemoryGameComponent from './Components/MemoryGameComponent'
-import {MemoryGame} from './MemoryGame'
 
 function App() {
   return (
